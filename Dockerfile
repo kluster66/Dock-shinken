@@ -37,10 +37,10 @@ RUN echo 'shinken:shinken' | chpasswd
 RUN echo 'dnsmasq:dnsmasq' | chpasswd
 
 # Partie 2 configuration de dnsmasq
-ADD  ./shinken_hosts/dnsmasq.conf /etc/
-ADD ./shinken_hosts/gen_0hosts.sh /home/shinken/
+ADD  ./conf_files/dnsmasq.conf /etc/
+ADD ./conf_files/gen_0hosts.sh /home/shinken/
 
-#ADD ./shinken_hosts/shinken_hosts /home/shinken/
+#ADD ./conf_files/conf_files /home/shinken/
 RUN chmod 755 /home/shinken/gen_0hosts.sh
 
 # google dns
@@ -53,10 +53,10 @@ RUN chmod u+s /usr/lib/nagios/plugins/check_icmp && \
 
 RUN shinken --init && shinken install webui && shinken install auth-cfg-password && shinken install sqlitedb && shinken install linux-snmp
 
-ADD ./shinken_hosts/broker-master.cfg /etc/shinken/brokers/
-ADD ./shinken_hosts/webui.cfg /etc/shinken/modules/
-ADD ./shinken_hosts/my_commands.sh /home/shinken/
-ADD ./shinken_hosts/logFiles_linux.conf /var/lib/shinken/libexec/
+ADD ./conf_files/broker-master.cfg /etc/shinken/brokers/
+ADD ./conf_files/webui.cfg /etc/shinken/modules/
+ADD ./conf_files/my_commands.sh /home/shinken/
+ADD ./conf_files/logFiles_linux.conf /var/lib/shinken/libexec/
 
 
 RUN chmod 665 /etc/shinken/brokers/broker-master.cfg
@@ -64,7 +64,7 @@ RUN chmod 655 /etc/shinken/modules/webui.cfg
 RUN chmod 655 /home/shinken/my_commands.sh
 RUN chmod 655 /var/lib/shinken/libexec/logFiles_linux.conf
 
-ADD ./shinken_hosts/gen_hosts.sh /home/shinken/
+ADD ./conf_files/gen_hosts.sh /home/shinken/
 RUN chmod 755 /home/shinken/gen_hosts.sh
 
 # partie 4 on construit les fichiers de parametre
