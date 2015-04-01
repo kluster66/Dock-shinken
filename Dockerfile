@@ -13,6 +13,9 @@ RUN apt-get install -y -q wget python-pycurl python-setuptools nagios-plugins
 
 # tout ce qui concerne dnsmasq
 RUN apt-get install -y -q dnsmasq 
+# installation mongoDB
+RUN apt-get install -y -q mongodb python-pymongo
+
 
 # tout les trucs optionnels
 RUN apt-get install -y -q locate ssh curl ntp
@@ -51,7 +54,7 @@ RUN echo 'nameserver 8.8.4.4' >> /etc/resolv.dnsmasq.conf
 RUN chmod u+s /usr/lib/nagios/plugins/check_icmp && \
 	ln -s /usr/lib/nagios/plugins/utils.pm /usr/share/perl5
 
-RUN shinken --init && shinken install webui && shinken install auth-cfg-password && shinken install sqlitedb && shinken install linux-snmp
+RUN shinken --init && shinken install webui && shinken install auth-cfg-password && shinken install mod-mongodb && shinken install linux-snmp
 
 ADD ./conf_files/broker-master.cfg /etc/shinken/brokers/
 ADD ./conf_files/webui.cfg /etc/shinken/modules/
