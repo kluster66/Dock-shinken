@@ -3,9 +3,10 @@
 /home/shinken/gen_hosts.sh
 
 # on démarre les services
-
+service apache2 start
 service dnsmasq start 
 service shinken start
+service thruk start
 
 while true;
 do

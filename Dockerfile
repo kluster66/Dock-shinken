@@ -16,7 +16,11 @@ RUN 	apt-get update && \
 RUN 	apt-get install -y -q 	wget \
 				python-pycurl \
 				python-setuptools \
-				nagios-plugins
+				nagios-plugins \
+				libgd3 \
+				apache2 \
+				libapache2-mod-fcgid \
+				xvfb
 
 # tout ce qui concerne dnsmasq
 RUN 	apt-get install -y -q dnsmasq 
@@ -49,6 +53,11 @@ RUN 	cd /home/shinken && \
 	rm -rf shinken-2.0.4 &&\
 	rm shinken-2.0.4.tar.gz
 
+
+RUN	wget http://download.thruk.org/pkg/v1.88-2/ubuntu14.04/amd64/thruk_1.88-2_ubuntu14.04_amd64.deb && \ 
+	dpkg -i thruk_1.88-2_ubuntu14.04_amd64.deb
+
+
 # on change le mot de passe de shinken et de dnsmasq
 RUN 	echo 'shinken:shinken' | chpasswd
 RUN 	echo 'dnsmasq:dnsmasq' | chpasswd
@@ -80,7 +89,7 @@ ADD 	./conf_files/broker-master.cfg /etc/shinken/brokers/
 ADD 	./conf_files/webui.cfg /etc/shinken/modules/
 ADD 	./conf_files/my_commands.sh /home/shinken/
 ADD 	./conf_files/logFiles_linux.conf /var/lib/shinken/libexec/
-
+ADD	./conf_files/thruk_local.conf /etc/thruk/thruk_local.conf
 
 RUN 	chmod 665 /etc/shinken/brokers/broker-master.cfg
 RUN 	chmod 655 /etc/shinken/modules/webui.cfg

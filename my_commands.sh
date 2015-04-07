@@ -6,7 +6,7 @@
 
 service dnsmasq start
 service shinken start
-
+service apache2 start
 while true;
 do
         date

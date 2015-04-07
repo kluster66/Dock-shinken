@@ -1,9 +1,6 @@
-#===============================================================#
-# this file is responsible for:					#		
-#	- managing the 0hosts file for dnsmasq tools		#
-#	- managing the hosts_<hostname>.cfg files for shinken	#
-#								#
-# usage: each line need to be configured like this		#
-# <hostname>:<IP>						#
-#===============================================================#
-
+callisto:192.168.0.16
+mercure:192.168.0.36
+europe:192.168.0.9
+mars:192.168.0.80
+esx-1:192.168.0.46
+pi:192.168.0.21
